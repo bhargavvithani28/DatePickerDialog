@@ -1,0 +1,24 @@
+ DATE_PICK_NAME.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+
+                DatePickerDialog datepicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar fromCal = Calendar.getInstance();
+                        fromCal.setTimeInMillis(0);
+                        fromCal.set(year, monthOfYear, dayOfMonth, 0, 0, 0);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        String dateString = dateFormat.format(fromCal.getTime());
+                        DATE_PICK_NAME.setText(dateString);
+                    }
+                }, year, month, day);
+                datepicker.show();
+
+            }
+        });
